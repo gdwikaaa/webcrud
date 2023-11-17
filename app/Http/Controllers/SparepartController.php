@@ -11,7 +11,7 @@ class SparepartController extends Controller
     public function index()
     {
         $sparepart = DB::table('sparepart')
-        ->select("sparepart.id", "kdbarang", "sparepart.nama", "merk_id", "merk.nama AS merk_nama")
+        ->select("sparepart.id", "kdbarang", "sparepart.nama", "sparepart.harga", "merk_id", "merk.nama AS merk_nama")
         ->join('merk', 'merk.id', '=', 'sparepart.merk_id')
         ->get();
 
@@ -28,8 +28,9 @@ class SparepartController extends Controller
     public function store(Request $request)
     {
         DB::table('sparepart')->insert([
-            'kdbrang' => $request->nim,
+            'kdbarang' => $request->kdbarang,
             'nama' => $request->nama,
+            'harga' => $request->harga,
             'merk_id' => $request->merk,
         ]);
 
@@ -41,8 +42,9 @@ class SparepartController extends Controller
         DB::table('sparepart')
         ->where('id', $id)
         ->update([
-            'kdbrang' => $request->nim,
+            'kdbarang' => $request->kdbarang,
             'nama' => $request->nama,
+            'harga' => $request->harga,
             'merk_id' => $request->merk,
         ]);
 
@@ -52,7 +54,7 @@ class SparepartController extends Controller
     public function edit($id)
     {
         $sparepart = DB::table('sparepart')
-        ->select("sparepart.id", "kdbarang", "sparepart.nama", "merk_id", "merk.nama AS merk_nama")
+        ->select("sparepart.id", "kdbarang", "sparepart.nama", "sparepart.harga", "merk_id", "merk.nama AS merk_nama")
         ->join('merk', 'merk.id', '=', 'sparepart.merk_id')
         ->where('sparepart.id', $id)
         ->first();

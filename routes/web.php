@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\banController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SparepartController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index']);
 
 Route::controller(SparepartController::class)->prefix("sparepart")->group(function () {
     Route::get('/', 'index');

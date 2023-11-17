@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('kdban')->unique();
             $table->string('nama');
+            $table->string('harga');
             $table->foreignId('merkban_id');
             $table->timestamps();
         });

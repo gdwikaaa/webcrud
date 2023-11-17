@@ -27,6 +27,10 @@
                     <input class="form-control" type="text" name="nama" value="{{ $data->nama }}">
                 </div>
                 <div>
+                    <label class="form-label">Harga</label>
+                    <input class="form-control" type="text" name="harga" value="{{ $data->harga }}">
+                </div>
+                <div>
                     <label class="form-label">merk</label>
                     <select class="form-select" name="merk">
                         @foreach ($merk as $m)

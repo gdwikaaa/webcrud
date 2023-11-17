@@ -11,7 +11,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-10">
-                    <h4 class="card-title">Tabel Sparepart Motor</h4>
+                    <h4 class="card-title">Katalog Sparepart</h4>
                 </div>
                 <div class="col-2">
                     <a class="btn btn-sm btn-primary float-end" href="{{ url('/sparepart/create') }}">Tambah</a>
@@ -24,6 +24,7 @@
                     <tr>
                         <th scope="col">Kode</th>
                         <th scope="col">Nama Barang</th>
+                        <th scope="col">Harga</th>
                         <th scope="col">Merk</th>
                         <th scope="col"></th>
                     </tr>
@@ -33,6 +34,7 @@
                         <tr>
                             <td>{{ $d->kdbarang }}</td>
                             <td>{{ $d->nama }}</td>
+                            <td>{{ $d->harga }}</td>
                             <td>{{ $d->merk_nama }}</td>
                             <td class="float-end">
                                 <a class="btn btn-sm btn-warning"

@@ -20,11 +20,15 @@
             <div class="card-body">
                 <div>
                     <label class="form-label">NIM</label>
-                    <input class="form-control" type="text" name="nim" value="{{ $data->nim }}">
+                    <input class="form-control" type="text" name="nim" value="{{ $banban->kdbarang }}">
                 </div>
                 <div>
                     <label class="form-label">Nama</label>
-                    <input class="form-control" type="text" name="nama" value="{{ $data->nama }}">
+                    <input class="form-control" type="text" name="nama" value="{{ $banban->nama }}">
+                </div>
+                <div>
+                    <label class="form-label">Harga</label>
+                    <input class="form-control" type="number" name="harga" value="{{ $banban->harga }}">
                 </div>
                 <div>
                     <label class="form-label">merk</label>

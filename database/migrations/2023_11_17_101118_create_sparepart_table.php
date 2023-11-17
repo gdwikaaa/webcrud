@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('kdbarang')->unique();
             $table->string('nama');
+            $table->string('harga');
             $table->foreignId('merk_id');
             $table->timestamps();
         });

@@ -19,15 +19,19 @@
                 @csrf
                 <div>
                     <label class="form-label">Kode Barang</label>
-                    <input class="form-control" type="text" name="nim">
+                    <input class="form-control" type="text" name="kdbarang">
                 </div>
                 <div>
                     <label class="form-label">Nama</label>
                     <input class="form-control" type="text" name="nama">
                 </div>
                 <div>
+                    <label class="form-label">Harga</label>
+                    <input class="form-control" type="text" name="harga">
+                </div>
+                <div>
                     <label class="form-label">Merk</label>
-                    <select class="form-select" name="jurusan">
+                    <select class="form-select" name="merk">
                         @foreach ($merk as $m)
                             <option value="{{ $m->id }}">{{ $m->nama }}</option>
                         @endforeach

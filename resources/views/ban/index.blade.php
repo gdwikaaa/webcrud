@@ -24,8 +24,8 @@
                     <tr>
                         <th scope="col">Kode BAN</th>
                         <th scope="col">Nama</th>
-                        <th scope="col">Merk</th>
                         <th scope="col">Harga</th>
+                        <th scope="col">Merk</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -34,11 +34,12 @@
                         <tr>
                             <td>{{ $bb->kdban }}</td>
                             <td>{{ $bb->nama }}</td>
+                            <td>{{ $bb->harga }}</td>
                             <td>{{ $bb->merkban_nama }}</td>
                             <td class="float-end">
                                 <a class="btn btn-sm btn-warning"
                                     href="{{ url('/ban/' . $bb->id . '/edit') }}">Ubah</a>
-                                <form style="display: inline;" action="{{ url('/mk/' . $bb->id) }}" method ="POST">
+                                <form style="display: inline;" action="{{ url('/ban/' . $bb->id) }}" method ="POST">
                                     @csrf
                                     @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger">Hapus</button>

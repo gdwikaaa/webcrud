@@ -1,9 +1,12 @@
-<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-        <svg class="bi me-2" width="50" height="42">
-            <use xlink:href="#bootstrap"></use>
+<header class="navbar navbar-expand-lg bg-body-tertiary py-3 mb-4 border-bottom">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
         </svg>
-        <span class="fs-4">Katalog Sparepart Motor</span>
+        <span class="fs-3 fw-bold badge bg-primary text-wrap" style="width: 15rem;">AutoMobile
+            
+        </span>
     </a>
 
     <ul class="nav nav-pills">

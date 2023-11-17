@@ -1,3 +1,4 @@
+
 @extends('layout.master')
 
 @section('title', 'Tambah Ban')
@@ -24,6 +25,10 @@
                 <div>
                     <label class="form-label">Nama</label>
                     <input class="form-control" type="text" name="nama">
+                </div>
+                <div>
+                    <label class="form-label">Harga</label>
+                    <input class="form-control" type="number" name="harga">
                 </div>
                 <div>
                     <label class="form-label">Merk</label>

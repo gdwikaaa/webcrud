@@ -12,7 +12,7 @@ class banController extends Controller
     public function index()
     {
         $ban = DB::table('ban')
-        ->select("ban.id", "kdban", "ban.nama", "merkban_id", "merkban.nama AS merkban_nama")
+        ->select("ban.id", "kdban", "ban.nama", "ban.harga", "merkban_id", "merkban.nama AS merkban_nama")
         ->join('merkban', 'merkban.id', '=', 'ban.merkban_id')
         ->get();
 
@@ -31,6 +31,7 @@ class banController extends Controller
         DB::table('ban')->insert([
             'kdban' => $request->kdban,
             'nama' => $request->nama,
+            'harga' => $request->harga,
             'merkban_id' => $request->merkban,
         ]);
 
@@ -44,6 +45,7 @@ class banController extends Controller
         ->update([
             'kdban' => $request->kdban,
             'nama' => $request->nama,
+            'harga' => $request->harga,
             'merkban_id' => $request->merkban,
         ]);
 
@@ -53,7 +55,7 @@ class banController extends Controller
     public function edit($id)
     {
         $ban = DB::table('ban')
-        ->select("ban.id", "kdban", "ban.nama", "merkban_id", "merkban.nama AS merkban_nama")
+        ->select("ban.id", "kdban", "ban.nama","ban.harga", "merkban_id", "merkban.nama AS merkban_nama")
         ->join('merkban', 'merkban.id', '=', 'ban.merkban_id')
         ->where('ban.id', $id)
         ->first();
