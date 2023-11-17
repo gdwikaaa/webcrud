@@ -1,0 +1,76 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class SparepartController extends Controller
+{
+
+    public function index()
+    {
+        $sparepart = DB::table('sparepart')
+        ->select("sparepart.id", "kdbarang", "sparepart.nama", "merk_id", "merk.nama AS merk_nama")
+        ->join('merk', 'merk.id', '=', 'sparepart.merk_id')
+        ->get();
+
+        return view('sparepart.index', ['data' => $sparepart]);
+    }
+
+    public function create()
+    {
+        $merk = DB::table('merk')->get();
+       
+        return view('sparepart.create', ['merk' => $merk]);
+    }
+
+    public function store(Request $request)
+    {
+        DB::table('sparepart')->insert([
+            'kdbrang' => $request->nim,
+            'nama' => $request->nama,
+            'merk_id' => $request->merk,
+        ]);
+
+        return redirect(url('/sparepart'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        DB::table('sparepart')
+        ->where('id', $id)
+        ->update([
+            'kdbrang' => $request->nim,
+            'nama' => $request->nama,
+            'merk_id' => $request->merk,
+        ]);
+
+        return redirect(url('/sparepart'));
+    }
+
+    public function edit($id)
+    {
+        $sparepart = DB::table('sparepart')
+        ->select("sparepart.id", "kdbarang", "sparepart.nama", "merk_id", "merk.nama AS merk_nama")
+        ->join('merk', 'merk.id', '=', 'sparepart.merk_id')
+        ->where('sparepart.id', $id)
+        ->first();
+
+        $merk = DB::table('merk')->get();
+
+        return view('sparepart.edit', ['data' => $sparepart, 'id' => $id, 'merk' => $merk]);
+    }
+
+    public function show($id)
+    {
+    }
+    public function destroy($id)
+    {
+        DB::table('sparepart')
+        ->where('id', $id)
+        ->delete();
+
+        return redirect(url('/sparepart'));
+    }
+}
