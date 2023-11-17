@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class SparepartController extends Controller
 {
@@ -66,6 +67,15 @@ class SparepartController extends Controller
 
     public function show($id)
     {
+        $sparepart = DB::table('sparepart')
+        ->select("sparepart.id", "kdbarang", "sparepart.nama", "sparepart.harga", "merk_id", "merk.nama AS merk_nama")
+        ->join('merk', 'merk.id', '=', 'sparepart.merk_id')
+        ->where('sparepart.id', $id)
+        ->first();
+
+        $merk = DB::table('merk')->get();
+
+        return view('sparepart.show', ['data' => $sparepart, 'id' => $id, 'merk' => $merk]);
     }
     public function destroy($id)
     {

@@ -34,11 +34,14 @@
                         <tr>
                             <td>{{ $d->kdbarang }}</td>
                             <td>{{ $d->nama }}</td>
-                            <td>{{ $d->harga }}</td>
+                            <td>Rp. {{ $d->harga }}</td>
                             <td>{{ $d->merk_nama }}</td>
                             <td class="float-end">
                                 <a class="btn btn-sm btn-warning"
                                     href="{{ url('/sparepart/' . $d->id . '/edit') }}">Ubah</a>
+                                    <a class="btn btn-sm btn-info"
+                                    href="{{ url('/sparepart/' . $d->id) }}">Lihat
+                                </a>
 
                                 <form style="display: inline;" action="{{ url('/sparepart/' . $d->id) }}" method ="POST">
                                     @csrf

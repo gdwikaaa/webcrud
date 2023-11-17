@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\banController;
-use App\Http\Controllers\BarangController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SparepartController;
 use Illuminate\Support\Facades\Route;

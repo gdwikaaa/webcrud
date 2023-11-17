@@ -19,8 +19,8 @@
             @method('PUT')
             <div class="card-body">
                 <div>
-                    <label class="form-label">NIM</label>
-                    <input class="form-control" type="text" name="nim" value="{{ $data->nim }}">
+                    <label class="form-label">Kode Sparepart</label>
+                    <input class="form-control" type="text" name="kdbarang" value="{{ $data->kdbarang }}">
                 </div>
                 <div>
                     <label class="form-label">Nama</label>
@@ -31,7 +31,7 @@
                     <input class="form-control" type="text" name="harga" value="{{ $data->harga }}">
                 </div>
                 <div>
-                    <label class="form-label">merk</label>
+                    <label class="form-label">Merk</label>
                     <select class="form-select" name="merk">
                         @foreach ($merk as $m)
                             <option {{ $data->merk_id == $m->id ? 'selected' : '' }} value="{{ $m->id }}">{{ $m->nama }}</option>

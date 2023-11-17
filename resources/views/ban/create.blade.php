@@ -28,7 +28,15 @@
                 </div>
                 <div>
                     <label class="form-label">Harga</label>
-                    <input class="form-control" type="number" name="harga">
+                    <input class="form-control" type="text" name="harga">
+                </div>
+                <div>
+                    <label class="form-label">Jenis</label>
+                    <select class="form-select" name="jenisban">
+                        @foreach ($jenisban as $jb)
+                            <option value="{{ $jb->id }}">{{ $jb->nama }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div>
                     <label class="form-label">Merk</label>

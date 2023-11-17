@@ -12,8 +12,9 @@ class banController extends Controller
     public function index()
     {
         $ban = DB::table('ban')
-        ->select("ban.id", "kdban", "ban.nama", "ban.harga", "merkban_id", "merkban.nama AS merkban_nama")
+        ->select("ban.id", "kdban", "ban.nama","ban.harga", "jenisban_id", "jenisban.nama AS jenisban_nama" ,"merkban_id", "merkban.nama AS merkban_nama")
         ->join('merkban', 'merkban.id', '=', 'ban.merkban_id')
+        ->join('jenisban', 'jenisban.id', '=', 'ban.jenisban_id')
         ->get();
 
         return view('ban.index', ['banban' => $ban]);
@@ -21,9 +22,10 @@ class banController extends Controller
 
     public function create()
     {
+        $jenisban = DB::table('jenisban')->get();
         $merkban = DB::table('merkban')->get();
        
-        return view('ban.create', ['merkban' => $merkban]);
+        return view('ban.create', ['jenisban' => $jenisban,'merkban' => $merkban]);
     }
 
     public function store(Request $request)
@@ -32,6 +34,7 @@ class banController extends Controller
             'kdban' => $request->kdban,
             'nama' => $request->nama,
             'harga' => $request->harga,
+            'jenisban_id' => $request->jenisban,
             'merkban_id' => $request->merkban,
         ]);
 
@@ -46,6 +49,7 @@ class banController extends Controller
             'kdban' => $request->kdban,
             'nama' => $request->nama,
             'harga' => $request->harga,
+            'jenisban_id' => $request->jenisban,
             'merkban_id' => $request->merkban,
         ]);
 
@@ -55,18 +59,31 @@ class banController extends Controller
     public function edit($id)
     {
         $ban = DB::table('ban')
-        ->select("ban.id", "kdban", "ban.nama","ban.harga", "merkban_id", "merkban.nama AS merkban_nama")
+        ->select("ban.id", "kdban", "ban.nama","ban.harga", "jenisban_id", "jenisban.nama AS jenisban_nama" ,"merkban_id", "merkban.nama AS merkban_nama")
         ->join('merkban', 'merkban.id', '=', 'ban.merkban_id')
+        ->join('jenisban', 'jenisban.id', '=', 'ban.jenisban_id')
         ->where('ban.id', $id)
         ->first();
 
+        $jenisban = DB::table('jenisban')->get();
         $merkban = DB::table('merkban')->get();
 
-        return view('ban.edit', ['banban' => $ban, 'id' => $id, 'merkban' => $merkban]);
+        return view('ban.edit', ['banban' => $ban, 'id' => $id,'jenisban' => $jenisban,'merkban' => $merkban]);
     }
 
     public function show($id)
     {
+        $ban = DB::table('ban')
+        ->select("ban.id", "kdban", "ban.nama","ban.harga", "jenisban_id", "jenisban.nama AS jenisban_nama" ,"merkban_id", "merkban.nama AS merkban_nama")
+        ->join('merkban', 'merkban.id', '=', 'ban.merkban_id')
+        ->join('jenisban', 'jenisban.id', '=', 'ban.jenisban_id')
+        ->where('ban.id', $id)
+        ->first();
+
+        $jenisban = DB::table('jenisban')->get();
+        $merkban = DB::table('merkban')->get();
+
+        return view('ban.show', ['banban' => $ban, 'id' => $id,'jenisban' => $jenisban, 'merkban' => $merkban]);
     }
     public function destroy($id)
     {
