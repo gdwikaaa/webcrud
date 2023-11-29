@@ -36,8 +36,8 @@
                             <td>{{ $bb->kdban }}</td>
                             <td>{{ $bb->nama }}</td>
                             <td>{{ $bb->harga }}</td>
-                            <td>{{ $bb->jenisban_nama }}</td>
-                            <td>{{ $bb->merkban_nama }}</td>
+                            <td>{{ $bb->jenisban->nama }}</td>
+                            <td>{{ $bb->merkban->nama }}</td>
                             <td class="float-end">
                                 <a class="btn btn-sm btn-warning"
                                     href="{{ url('/ban/' . $bb->id . '/edit') }}">Ubah</a>

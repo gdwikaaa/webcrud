@@ -5,32 +5,56 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\ban;
+use App\Models\merkban;
+use App\Models\jenisban;
 
 class banController extends Controller
 {
 
     public function index()
     {
-        $ban = DB::table('ban')
-        ->select("ban.id", "kdban", "ban.nama","ban.harga", "jenisban_id", "jenisban.nama AS jenisban_nama" ,"merkban_id", "merkban.nama AS merkban_nama")
-        ->join('merkban', 'merkban.id', '=', 'ban.merkban_id')
-        ->join('jenisban', 'jenisban.id', '=', 'ban.jenisban_id')
-        ->get();
+        $ban = ban::with('merkban')->get();
+        $ban = ban::with('jenisban')->get();
 
         return view('ban.index', ['banban' => $ban]);
     }
 
     public function create()
     {
-        $jenisban = DB::table('jenisban')->get();
-        $merkban = DB::table('merkban')->get();
+        // $jenisban = DB::table('jenisban')->get();
+        // $merkban = DB::table('merkban')->get();
+        $merkban = merkban::all();
+        $jenisban = jenisban::all();
        
         return view('ban.create', ['jenisban' => $jenisban,'merkban' => $merkban]);
     }
 
     public function store(Request $request)
     {
-        DB::table('ban')->insert([
+
+        $validated = $request->validate([
+            'kdban' => 'required',
+            'nama' => 'required',
+            'harga' => 'required',
+            'jenisban_id' => 'required',
+            'merkban_id' => 'required',
+        ]);
+
+       $ban = ban::create([
+            'kdban' => $validated['kdban'],
+            'nama' => $validated['nama'],
+            'harga' => $validated['harga'],
+            'jenisban_id' => $validated['jenisban'],
+            'merkban_id' => $validated['merkban'],
+        ]);
+
+        return redirect(url('/ban'));
+    }
+
+    public function update(Request $request, ban $ban)
+    {
+        $ban->update([
             'kdban' => $request->kdban,
             'nama' => $request->nama,
             'harga' => $request->harga,
@@ -41,55 +65,41 @@ class banController extends Controller
         return redirect(url('/ban'));
     }
 
-    public function update(Request $request, $id)
+    public function edit(ban $ban)
     {
-        DB::table('ban')
-        ->where('id', $id)
-        ->update([
-            'kdban' => $request->kdban,
-            'nama' => $request->nama,
-            'harga' => $request->harga,
-            'jenisban_id' => $request->jenisban,
-            'merkban_id' => $request->merkban,
-        ]);
+        $ban->load('jenisban');
+        $ban->load('merkban');
+        // ->select("ban.id", "kdban", "ban.nama","ban.harga", "jenisban_id", "jenisban.nama AS jenisban_nama" ,"merkban_id", "merkban.nama AS merkban_nama")
+        // ->join('merkban', 'merkban.id', '=', 'ban.merkban_id')
+        // ->join('jenisban', 'jenisban.id', '=', 'ban.jenisban_id')
+        // ->where('ban.id', $id)
+        // ->first();
 
-        return redirect(url('/ban'));
+        $jenisban = jenisban::all();
+        $merkban = merkban::all();
+
+        return view('ban.edit', ['banban' => $ban, 'id' => $ban->id,'jenisban' => $jenisban,'merkban' => $merkban]);
     }
 
-    public function edit($id)
+    public function show(ban $ban)
     {
-        $ban = DB::table('ban')
-        ->select("ban.id", "kdban", "ban.nama","ban.harga", "jenisban_id", "jenisban.nama AS jenisban_nama" ,"merkban_id", "merkban.nama AS merkban_nama")
-        ->join('merkban', 'merkban.id', '=', 'ban.merkban_id')
-        ->join('jenisban', 'jenisban.id', '=', 'ban.jenisban_id')
-        ->where('ban.id', $id)
-        ->first();
+        $ban->load('jenisban');
+        $ban->load('merkban');
+        // $ban = DB::table('ban')
+        // ->select("ban.id", "kdban", "ban.nama","ban.harga", "jenisban_id", "jenisban.nama AS jenisban_nama" ,"merkban_id", "merkban.nama AS merkban_nama")
+        // ->join('merkban', 'merkban.id', '=', 'ban.merkban_id')
+        // ->join('jenisban', 'jenisban.id', '=', 'ban.jenisban_id')
+        // ->where('ban.id', $id)
+        // ->first();
 
-        $jenisban = DB::table('jenisban')->get();
-        $merkban = DB::table('merkban')->get();
+        $jenisban = jenisban::all();
+        $merkban = merkban::all();
 
-        return view('ban.edit', ['banban' => $ban, 'id' => $id,'jenisban' => $jenisban,'merkban' => $merkban]);
+        return view('ban.show', ['banban' => $ban, 'id' => $ban->id,'jenisban' => $jenisban, 'merkban' => $merkban]);
     }
-
-    public function show($id)
+    public function destroy(ban $ban)
     {
-        $ban = DB::table('ban')
-        ->select("ban.id", "kdban", "ban.nama","ban.harga", "jenisban_id", "jenisban.nama AS jenisban_nama" ,"merkban_id", "merkban.nama AS merkban_nama")
-        ->join('merkban', 'merkban.id', '=', 'ban.merkban_id')
-        ->join('jenisban', 'jenisban.id', '=', 'ban.jenisban_id')
-        ->where('ban.id', $id)
-        ->first();
-
-        $jenisban = DB::table('jenisban')->get();
-        $merkban = DB::table('merkban')->get();
-
-        return view('ban.show', ['banban' => $ban, 'id' => $id,'jenisban' => $jenisban, 'merkban' => $merkban]);
-    }
-    public function destroy($id)
-    {
-        DB::table('ban')
-        ->where('id', $id)
-        ->delete();
+        $ban->delete();
 
         return redirect(url('/ban'));
 }

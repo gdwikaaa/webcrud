@@ -16,8 +16,8 @@
                   <p class="card-text">Kode Ban   : {{ $banban->kdban }}</p>
                   <p class="card-text">Nama Ban      : {{ $banban->nama }}</p>
                   <p class="card-text">harga            : {{ $banban->harga }}</p>
-                  <p class="card-text">Jenis Ban            : {{ $banban->jenisban_nama }}</p>
-                  <p class="card-text">Merk             : {{ $banban->merkban_nama }}</p>
+                  <p class="card-text">Jenis Ban            : {{ $banban->jenisban->nama }}</p>
+                  <p class="card-text">Merk             : {{ $banban->merkban->nama }}</p>
                   <a class="btn btn-sm btn-success" href="{{ url('/ban/') }}">Kembali</a>
               </hr>
             </div>

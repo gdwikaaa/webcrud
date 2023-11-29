@@ -19,31 +19,46 @@
             <div class="card-body">
                 @csrf
                 <div>
-                    <label class="form-label">Kode BAN</label>
-                    <input class="form-control" type="text" name="kdban">
+                    <label class="form-label @error('kdban') text-danger @enderror">Kode BAN</label>
+                    <input class="form-control @error('kdban') is-invalid @enderror" type="text" name="kdban">
+                    @error('kdban')
+                    <div class="invalid-feedback mb-2">{{$message }}</div?>
+                        @enderror
                 </div>
                 <div>
-                    <label class="form-label">Nama</label>
-                    <input class="form-control" type="text" name="nama">
+                    <label class="form-label @error('nama') text-danger @enderror">Nama</label>
+                    <input class="form-control @error('nama') is-invalid @enderror" type="text" name="nama">
+                    @error('nama')
+                    <div class="invalid-feedback mb-2">{{$message }}</div?>
+                        @enderror
                 </div>
                 <div>
-                    <label class="form-label">Harga</label>
-                    <input class="form-control" type="text" name="harga">
+                    <label class="form-label @error('harga') text-danger @enderror">Harga</label>
+                    <input class="form-control @error('harga') is-invalid @enderror" type="text" name="harga">
+                    @error('harga')
+                    <div class="invalid-feedback mb-2">{{$message }}</div?>
+                        @enderror
                 </div>
                 <div>
-                    <label class="form-label">Jenis</label>
-                    <select class="form-select" name="jenisban">
+                    <label class="form-label @error('jenisban') text-danger @enderror">Jenis</label>
+                    <select class="form-select @error('jenisban') is-invalid @enderror" name="jenisban">
                         @foreach ($jenisban as $jb)
                             <option value="{{ $jb->id }}">{{ $jb->nama }}</option>
                         @endforeach
+                        @error('jenisban')
+                        <div class="invalid-feedback mb-2">{{$message }}</div?>
+                            @enderror
                     </select>
                 </div>
                 <div>
-                    <label class="form-label">Merk</label>
-                    <select class="form-select" name="merkban">
+                    <label class="form-label @error('merkban') text-danger @enderror">Merk</label>
+                    <select class="form-select @error('merkban') is-invalid @enderror" name="merkban">
                         @foreach ($merkban as $mb)
                             <option value="{{ $mb->id }}">{{ $mb->nama }}</option>
                         @endforeach
+                        @error('merkban')
+                        <div class="invalid-feedback mb-2">{{$message }}</div?>
+                            @enderror
                     </select>
                 </div>
 

@@ -23,18 +23,18 @@ Route::controller(SparepartController::class)->prefix("sparepart")->group(functi
     Route::get('/', 'index');
     Route::post('/', 'store');
     Route::get('/create', 'create');
-    Route::get('/{id}', 'show');
-    Route::put('/{id}', 'update');
-    Route::delete('/{id}', 'destroy');
-    Route::get('/{id}/edit', 'edit');
+    Route::get('/{sparepart}', 'show');
+    Route::put('/{sparepart}', 'update');
+    Route::delete('/{sparepart}', 'destroy');
+    Route::get('/{sparepart}/edit', 'edit');
 });
 
 Route::controller(BanController::class)->prefix("ban")->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');
     Route::get('/create', 'create');
-    Route::get('/{id}', 'show');
-    Route::put('/{id}', 'update');
-    Route::delete('/{id}', 'destroy');
-    Route::get('/{id}/edit', 'edit');
+    Route::get('/{ban}', 'show');
+    Route::put('/{ban}', 'update');
+    Route::delete('/{ban}', 'destroy');
+    Route::get('/{ban}/edit', 'edit');
 });
