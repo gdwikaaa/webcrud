@@ -34,11 +34,11 @@ class banController extends Controller
     {
 
         $validated = $request->validate([
-            'kdban' => 'required',
+            'kdban' => ['required', 'min:8', 'max:10'],
             'nama' => 'required',
             'harga' => 'required',
-            'jenisban_id' => 'required',
-            'merkban_id' => 'required',
+            'jenisban' => ['required', 'exists:jenisban,id'],
+            'merkban' => ['required','exists:merkban,id']
         ]);
 
        $ban = ban::create([
